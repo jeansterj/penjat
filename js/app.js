@@ -1,6 +1,14 @@
-let wordsGame = startWords();
-let wordSelect = selectWord();
+let wordsGame;
+let wordSelect;
 let provenLyrics =[];
+let letraProvada = document.getElementById('provenLyrics');
+let trys = 6;
+let showTime = document.getElementById('time');
+const seconsTrans = 1000;
+let timer = 0;
+
+
+
 
 let abecedario =  ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K", "L", "M", "N", "Ñ","O", "P", "Q", "R", "S","T", "U", "V", "W", "X","Y", "Z"]
 
@@ -74,8 +82,14 @@ function selectWord() {
 function loadingGame() {
 
     document.getElementById("starGame").style.display = "none";
+    contarTiempo();
+
+    wordsGame = startWords();
+    wordSelect = selectWord();
 
     cargarPalabra();
+
+
 
 
     const rows = 3;
@@ -95,17 +109,13 @@ function loadingGame() {
             // Crea un botón en la celda
             let button = document.createElement("button");
             button.id = i * cols + j; // Asigna un ID único al botón
-            button.onclick = function () {
-                voltear(this.id); // Asigna la función de voltear al evento click
-            };
+            button.onclick = function (){ revisionLetra(this.id); };
             button.innerHTML = abecedario[i * cols + j];
 
             // Añade el botón a la celda
             cell.appendChild(button);
         }
     }
-
-
 
 }
 
@@ -122,4 +132,48 @@ for (let i = 0; i < wordSelect.length; i++) {
     
 }
 
+function revisionLetra(id) {
+
+    const spans = document.querySelectorAll( '#palabraAdivinar span');
+    
+    let botnSelect = document.getElementById(id);
+    botnSelect.disabled = true;
+
+    let letra = botnSelect.innerHTML.toUpperCase() ;
+    let palabra = wordSelect.toUpperCase();
+
+
+    provenLyrics.push(letra);
+    letraProvada.innerHTML = `Letras Probadas: ${provenLyrics.join(', ')} `;
+
+    console.log(palabra);
+
+    for (let i = 0; i < palabra.length; i++) 
+    
+    {
+    
+        if(palabra[i] === letra){
+            spans[i].innerHTML = letra; 
+            
+
+        } else [
+
+            trys--
+
+        ]
+
+    }
+    
+}
+
+function contarTiempo() {
+
+    timerRegre = setInterval(() => {
+
+        timer++;
+        showTime.innerHTML = `Tiempo: ${timer} segundos`;
+
+    }, seconsTrans)
+
+}
 
