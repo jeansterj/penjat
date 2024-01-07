@@ -1,3 +1,7 @@
+window.onload = function () {
+    cargarEstadoJuegoDesdeCookies();
+};
+
 let wordsGame;
 let wordSelect;
 let provenLyrics = [];
@@ -7,6 +11,7 @@ let showTime = document.getElementById('time');
 const seconsTrans = 1000;
 let timer = 0;
 let acierto = 0;
+
 
 
 
@@ -82,16 +87,13 @@ function selectWord() {
 
 function loadingGame() {
 
-    document.getElementById("starGame").style.display = "none";
+
     contarTiempo();
 
     wordsGame = startWords();
     wordSelect = selectWord();
 
     cargarPalabra();
-
-
-
 
     const rows = 3;
     const cols = 9;
@@ -123,6 +125,7 @@ function loadingGame() {
 function cargarPalabra() {
     let parrafo = document.getElementById("palabraAdivinar");
 
+
     for (let i = 0; i < wordSelect.length; i++) {
         let span = document.createElement('span');
         parrafo.appendChild(span);
@@ -139,6 +142,7 @@ function revisionLetra(id) {
     let botnSelect = document.getElementById(id);
     botnSelect.disabled = true;
 
+
     let letra = botnSelect.innerHTML.toUpperCase();
     let palabra = wordSelect.toUpperCase();
 
@@ -150,12 +154,10 @@ function revisionLetra(id) {
 
     for (let i = 0; i < palabra.length; i++) {
 
-        if (palabra[i] === letra) 
-        
-        {
+        if (palabra[i] === letra) {
             spans[i].innerHTML = letra;
             acierto++;
-            aciertos=true;
+            aciertos = true;
 
             comprobacionVictoria();
 
@@ -163,15 +165,14 @@ function revisionLetra(id) {
 
     }
 
-    if (aciertos == false ) 
-        
-    {
+    if (aciertos == false) {
         trys++;
         let source = `../img/img${trys}.png`;
         let img = document.getElementById("imagenStart");
         img.src = source;
         comprobacionDerrota();
     }
+
 
 }
 
@@ -194,10 +195,11 @@ function comprobacionVictoria() {
     if (acierto == wordSelect.length) {
         clearInterval(timerRegre);
 
-
         document.getElementById("contenedorGame").style.display = "none";
         document.getElementById("contenedor").style.display = "block";
         resultado.innerHTML = `Felicidaes haz logrado descubrir la palabra misteriosa en ${timer} segundos`;
+
+
 
 
     }
@@ -216,7 +218,14 @@ function comprobacionDerrota() {
         resultado.innerHTML = `Lamentablemente no se ha completado la palabra, la palabra a adivinar era ${wordSelect}`;
 
 
-    }
 
+    }
+   
 }
 
+function crearPartida() {
+
+    document.getElementById("formStart").style.display = "none";
+
+    return false;
+}

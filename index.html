@@ -18,12 +18,12 @@
 
 
 
-    <div>
-        <form action="">
+    <div id="formStart">
+        <form name="formData" onsubmit="return crearPartida()">
             <label for="userName">Nombre de Jugador</label>
             <input type="text" name="userName">
+            <button id="starGame" onclick="loadingGame()" type="submit"><img src="./img/start.png" alt="starGame"></button>
         </form>
-        <button id="starGame" onclick="loadingGame()"><img src="./img/start.png" alt="starGame"></button>
 
     </div>
 
