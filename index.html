@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,26 +15,47 @@
 
 
     <h1>El Ahorcado</h1>
-    
-<div>
-  <button id="starGame" onclick="loadingGame()"><img src="./img/start.png" alt="starGame"></button>  
-</div>
-
-<h1 id="category"></h1>
 
 
-<p id="palabraAdivinar"></p>
 
-<h1 id="provenLyrics"></h1>
+    <div>
+        <form action="">
+            <label for="userName">Nombre de Jugador</label>
+            <input type="text" name="userName">
+        </form>
+        <button id="starGame" onclick="loadingGame()"><img src="./img/start.png" alt="starGame"></button>
 
-<h1 id="time"></h1>
+    </div>
+
+    <img id="imagenStart" src="./img/img0.png" alt="imagenAhorcado">
 
 
-<div>
+    <div id="contenedorGame">
 
-    <table id="letters"></table>
 
-</div>
+        <h1 id="category"></h1>
+
+        <p id="palabraAdivinar"></p>
+
+        <h1 id="provenLyrics"></h1>
+
+        <h1 id="time"></h1>
+
+
+        <div>
+
+            <table id="letters"></table>
+
+        </div>
+
+
+    </div>
+
+    <div class="endGame" id="contenedor">
+        <p id="resultado"></p>
+        <button onclick="window.location.href='./index.html'">Volver a Jugar</button>
+    </div>
+
 
 
 

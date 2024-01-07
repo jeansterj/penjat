@@ -1,16 +1,17 @@
 let wordsGame;
 let wordSelect;
-let provenLyrics =[];
+let provenLyrics = [];
 let letraProvada = document.getElementById('provenLyrics');
-let trys = 6;
+let trys = 0;
 let showTime = document.getElementById('time');
 const seconsTrans = 1000;
 let timer = 0;
+let acierto = 0;
 
 
 
 
-let abecedario =  ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K", "L", "M", "N", "Ñ","O", "P", "Q", "R", "S","T", "U", "V", "W", "X","Y", "Z"]
+let abecedario = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 
 function startWords() {
@@ -19,44 +20,44 @@ function startWords() {
 
     const maxCategory = 3;
 
-    let electionCategory =  Math.floor(Math.random() * maxCategory) + 1;
+    let electionCategory = Math.floor(Math.random() * maxCategory) + 1;
 
     switch (electionCategory) {
 
         case 1:
             category.innerHTML = `Categoria: 1`;
 
-        palabras = ["perro", "paralelepipedo", "quevedo", "auronplay", "pasta",
-        "gato", "helado", "america", "biyin", "play",
-        "goku", "puerta", "parque", "axozer", "guitarra",
-        "reborn", "rubius", "stream", "pelota", "futbol",
-        "camara", "instirucion", "peliculas", "lasso", "avatar",
-        "teclado", "arepa", "maiz", "computadora", "frescolita"
-    ]
+            palabras = ["perro", "paralelepipedo", "quevedo", "auronplay", "pasta",
+                "gato", "helado", "america", "biyin", "play",
+                "goku", "puerta", "parque", "axozer", "guitarra",
+                "reborn", "rubius", "stream", "pelota", "futbol",
+                "camara", "instirucion", "peliculas", "lasso", "avatar",
+                "teclado", "arepa", "maiz", "computadora", "frescolita"
+            ]
             break;
         case 2:
             category.innerHTML = `Categoria: 2`;
 
 
-        palabras = ["perro", "paralelepipedo", "quevedo", "auronplay", "pasta",
-        "gato", "helado", "america", "biyin", "play",
-        "goku", "puerta", "parque", "axozer", "guitarra",
-        "reborn", "rubius", "stream", "pelota", "futbol",
-        "camara", "instirucion", "peliculas", "lasso", "avatar",
-        "teclado", "arepa", "maiz", "computadora", "frescolita"
-    ]
+            palabras = ["perro", "paralelepipedo", "quevedo", "auronplay", "pasta",
+                "gato", "helado", "america", "biyin", "play",
+                "goku", "puerta", "parque", "axozer", "guitarra",
+                "reborn", "rubius", "stream", "pelota", "futbol",
+                "camara", "instirucion", "peliculas", "lasso", "avatar",
+                "teclado", "arepa", "maiz", "computadora", "frescolita"
+            ]
             break
         default:
             category.innerHTML = `Categoria: 3`;
 
 
-        palabras = ["perro", "paralelepipedo", "quevedo", "auronplay", "pasta",
-        "gato", "helado", "america", "biyin", "play",
-        "goku", "puerta", "parque", "axozer", "guitarra",
-        "reborn", "rubius", "stream", "pelota", "futbol",
-        "camara", "instirucion", "peliculas", "lasso", "avatar",
-        "teclado", "arepa", "maiz", "computadora", "frescolita"
-    ]
+            palabras = ["perro", "paralelepipedo", "quevedo", "auronplay", "pasta",
+                "gato", "helado", "america", "biyin", "play",
+                "goku", "puerta", "parque", "axozer", "guitarra",
+                "reborn", "rubius", "stream", "pelota", "futbol",
+                "camara", "instirucion", "peliculas", "lasso", "avatar",
+                "teclado", "arepa", "maiz", "computadora", "frescolita"
+            ]
             break;
 
     }
@@ -109,7 +110,7 @@ function loadingGame() {
             // Crea un botón en la celda
             let button = document.createElement("button");
             button.id = i * cols + j; // Asigna un ID único al botón
-            button.onclick = function (){ revisionLetra(this.id); };
+            button.onclick = function () { revisionLetra(this.id); };
             button.innerHTML = abecedario[i * cols + j];
 
             // Añade el botón a la celda
@@ -119,27 +120,26 @@ function loadingGame() {
 
 }
 
-function cargarPalabra() 
-
-{
+function cargarPalabra() {
     let parrafo = document.getElementById("palabraAdivinar");
-    
-for (let i = 0; i < wordSelect.length; i++) {
-    let span = document.createElement('span');
-    parrafo.appendChild(span);
 
-}
-    
+    for (let i = 0; i < wordSelect.length; i++) {
+        let span = document.createElement('span');
+        parrafo.appendChild(span);
+
+    }
+
 }
 
 function revisionLetra(id) {
 
-    const spans = document.querySelectorAll( '#palabraAdivinar span');
-    
+    const spans = document.querySelectorAll('#palabraAdivinar span');
+    let aciertos = false;
+
     let botnSelect = document.getElementById(id);
     botnSelect.disabled = true;
 
-    let letra = botnSelect.innerHTML.toUpperCase() ;
+    let letra = botnSelect.innerHTML.toUpperCase();
     let palabra = wordSelect.toUpperCase();
 
 
@@ -148,23 +148,33 @@ function revisionLetra(id) {
 
     console.log(palabra);
 
-    for (let i = 0; i < palabra.length; i++) 
-    
-    {
-    
-        if(palabra[i] === letra){
-            spans[i].innerHTML = letra; 
-            
+    for (let i = 0; i < palabra.length; i++) {
 
-        } else [
+        if (palabra[i] === letra) 
+        
+        {
+            spans[i].innerHTML = letra;
+            acierto++;
+            aciertos=true;
 
-            trys--
+            comprobacionVictoria();
 
-        ]
+        }
 
     }
-    
+
+    if (aciertos == false ) 
+        
+    {
+        trys++;
+        let source = `../img/img${trys}.png`;
+        let img = document.getElementById("imagenStart");
+        img.src = source;
+        comprobacionDerrota();
+    }
+
 }
+
 
 function contarTiempo() {
 
@@ -174,6 +184,39 @@ function contarTiempo() {
         showTime.innerHTML = `Tiempo: ${timer} segundos`;
 
     }, seconsTrans)
+
+}
+
+function comprobacionVictoria() {
+
+    let resultado = document.getElementById('resultado');
+
+    if (acierto == wordSelect.length) {
+        clearInterval(timerRegre);
+
+
+        document.getElementById("contenedorGame").style.display = "none";
+        document.getElementById("contenedor").style.display = "block";
+        resultado.innerHTML = `Felicidaes haz logrado descubrir la palabra misteriosa en ${timer} segundos`;
+
+
+    }
+
+}
+
+function comprobacionDerrota() {
+
+    let resultado = document.getElementById('resultado');
+
+    if (trys == 7) {
+        clearInterval(timerRegre);
+
+        document.getElementById("contenedorGame").style.display = "none";
+        document.getElementById("contenedor").style.display = "block";
+        resultado.innerHTML = `Lamentablemente no se ha completado la palabra, la palabra a adivinar era ${wordSelect}`;
+
+
+    }
 
 }
 

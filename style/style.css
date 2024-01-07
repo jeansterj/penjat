@@ -25,3 +25,7 @@ margin-right: 6px;
 display: inline-block;
 
 }
+
+.endGame{
+    display: none;
+}
