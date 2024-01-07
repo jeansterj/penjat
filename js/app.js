@@ -1,6 +1,3 @@
-window.onload = function () {
-    cargarEstadoJuegoDesdeCookies();
-};
 
 let wordsGame;
 let wordSelect;
