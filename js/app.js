@@ -3,26 +3,30 @@ let wordsGame;
 let wordSelect;
 let provenLyrics = [];
 let letraProvada = document.getElementById('provenLyrics');
-let trys = 0;
+let trys;
 let showTime = document.getElementById('time');
 const seconsTrans = 1000;
-let timer = 0;
+let timer;
 let acierto = 0;
-
-
-
 
 
 let abecedario = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
-
 function startWords() {
 
     let category = document.getElementById('category');
+    let electionCategory;
 
     const maxCategory = 3;
 
-    let electionCategory = Math.floor(Math.random() * maxCategory) + 1;
+    if (getCookie("category")) {
+        electionCategory = getCookie("category")
+    } else {
+
+       electionCategory  = Math.floor(Math.random() * maxCategory) + 1;
+    }
+
+
 
     switch (electionCategory) {
 
@@ -63,6 +67,7 @@ function startWords() {
             break;
 
     }
+    setCookie("category",electionCategory,1);
 
     return palabras;
 
@@ -77,6 +82,7 @@ function selectWord() {
     selection = Math.floor(Math.random() * maxWords) + 1;
     wordElection = wordsGame[selection];
 
+
     return wordElection;
 
 
@@ -84,11 +90,28 @@ function selectWord() {
 
 function loadingGame() {
 
+    if (getCookie("timer")) {
+        timer = getCookie("timer");
+    } else {
+        timer = 0;
+    }
+
 
     contarTiempo();
 
     wordsGame = startWords();
-    wordSelect = selectWord();
+
+
+    if (getCookie("palabra")) {
+        
+    wordSelect = getCookie("palabra");
+
+    } else {
+
+        wordSelect = selectWord();
+
+    }
+
 
     cargarPalabra();
 
@@ -112,9 +135,15 @@ function loadingGame() {
             button.onclick = function () { revisionLetra(this.id); };
             button.innerHTML = abecedario[i * cols + j];
 
+            
+
             // Añade el botón a la celda
             cell.appendChild(button);
         }
+    }
+
+    if (getCookie("letraProvada")) {
+        provenLyrics = getCookie("letraProvada").split(', ');
     }
 
 }
@@ -139,15 +168,32 @@ function revisionLetra(id) {
     let botnSelect = document.getElementById(id);
     botnSelect.disabled = true;
 
-
     let letra = botnSelect.innerHTML.toUpperCase();
     let palabra = wordSelect.toUpperCase();
+    
+    if (getCookie("palabra")) {
+        
+        palabra = getCookie("palabra");
+    
+        } 
+
+    setCookie("palabra",palabra,1);
 
 
     provenLyrics.push(letra);
+
+
     letraProvada.innerHTML = `Letras Probadas: ${provenLyrics.join(', ')} `;
+    
+    setCookie("letraProvada", provenLyrics.join(', '), 1);
 
     console.log(palabra);
+
+    if (getCookie("acierto")) {
+        acierto = getCookie("acierto");
+    } else {
+        acierto = 0
+    }
 
     for (let i = 0; i < palabra.length; i++) {
 
@@ -156,6 +202,7 @@ function revisionLetra(id) {
             acierto++;
             aciertos = true;
 
+            setCookie("acierto",acierto,1);
             comprobacionVictoria();
 
         }
@@ -163,10 +210,23 @@ function revisionLetra(id) {
     }
 
     if (aciertos == false) {
+
+        if (getCookie("intento")) {
+            trys = getCookie("intento");
+        } else {
+            trys = 0
+        }
+
         trys++;
         let source = `../img/img${trys}.png`;
         let img = document.getElementById("imagenStart");
-        img.src = source;
+
+      
+            img.src = source;
+    
+
+
+        setCookie("intento",trys,1);
         comprobacionDerrota();
     }
 
@@ -180,6 +240,8 @@ function contarTiempo() {
 
         timer++;
         showTime.innerHTML = `Tiempo: ${timer} segundos`;
+        setCookie("timer",timer,1);
+
 
     }, seconsTrans)
 
@@ -196,8 +258,13 @@ function comprobacionVictoria() {
         document.getElementById("contenedor").style.display = "block";
         resultado.innerHTML = `Felicidaes haz logrado descubrir la palabra misteriosa en ${timer} segundos`;
 
-
-
+        borrarCookie("timer");
+        borrarCookie("intento");
+        borrarCookie("acierto");
+        borrarCookie("letraProvada");
+        borrarCookie("palabra");
+        borrarCookie("category");
+        
 
     }
 
@@ -214,6 +281,13 @@ function comprobacionDerrota() {
         document.getElementById("contenedor").style.display = "block";
         resultado.innerHTML = `Lamentablemente no se ha completado la palabra, la palabra a adivinar era ${wordSelect}`;
 
+        borrarCookie("timer");
+        borrarCookie("intento");
+        borrarCookie("acierto");
+        borrarCookie("letraProvada");
+        borrarCookie("palabra");
+        borrarCookie("category");
+        
 
 
     }
@@ -225,4 +299,29 @@ function crearPartida() {
     document.getElementById("formStart").style.display = "none";
 
     return false;
+}
+
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  function borrarCookie(cookie) {
+    document.cookie = cookie + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
 }
