@@ -10,6 +10,7 @@ let timer;
 let acierto = 0;
 
 
+
 let abecedario = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 function startWords() {
@@ -112,9 +113,13 @@ function loadingGame() {
 
     }
 
+    if (getCookie("letraProvada")) {
+        provenLyrics = getCookie("letraProvada").split(', ');
+    }
 
     cargarPalabra();
 
+    
     const rows = 3;
     const cols = 9;
 
@@ -135,6 +140,10 @@ function loadingGame() {
             button.onclick = function () { revisionLetra(this.id); };
             button.innerHTML = abecedario[i * cols + j];
 
+            if (provenLyrics.includes(abecedario[i * cols + j])) {
+                button.disabled = true;
+            }
+
             
 
             // Añade el botón a la celda
@@ -142,9 +151,7 @@ function loadingGame() {
         }
     }
 
-    if (getCookie("letraProvada")) {
-        provenLyrics = getCookie("letraProvada").split(', ');
-    }
+   
 
 }
 
@@ -154,15 +161,21 @@ function cargarPalabra() {
 
     for (let i = 0; i < wordSelect.length; i++) {
         let span = document.createElement('span');
+
+        if (provenLyrics.includes(wordSelect[i].toUpperCase())) {
+            span.innerHTML = wordSelect[i].toUpperCase();
+        }
+
         parrafo.appendChild(span);
 
     }
-
 }
+
 
 function revisionLetra(id) {
 
     const spans = document.querySelectorAll('#palabraAdivinar span');
+
     let aciertos = false;
 
     let botnSelect = document.getElementById(id);
@@ -193,6 +206,7 @@ function revisionLetra(id) {
         acierto = getCookie("acierto");
     } else {
         acierto = 0
+
     }
 
     for (let i = 0; i < palabra.length; i++) {
@@ -200,6 +214,7 @@ function revisionLetra(id) {
         if (palabra[i] === letra) {
             spans[i].innerHTML = letra;
             acierto++;
+
             aciertos = true;
 
             setCookie("acierto",acierto,1);
