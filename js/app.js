@@ -312,6 +312,7 @@ function comprobacionDerrota() {
 function crearPartida() {
 
     document.getElementById("formStart").style.display = "none";
+    document.getElementById("contenedorGame").style.display = "inline-block";
 
     return false;
 }

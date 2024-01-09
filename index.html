@@ -14,33 +14,37 @@
 
 
 
-    <h1>El Ahorcado</h1>
+    <h1>AHORCADO</h1>
 
 
 
     <div id="formStart">
         <form name="formData" onsubmit="return crearPartida()">
-            <label for="userName">Nombre de Jugador</label>
-            <input type="text" name="userName">
+            <input type="text" name="userName" placeholder="Ingresa El Nombre del Jugador" maxlength="40">
+            <br><br>
             <button id="starGame" onclick="loadingGame()" type="submit"><img src="./img/start.png" alt="starGame"></button>
         </form>
 
     </div>
 
-    <img id="imagenStart" src="./img/img0.png" alt="imagenAhorcado">
+    <div class="imgContainer">
+        <img id="imagenStart" src="./img/img0.png" alt="imagenAhorcado">
+
+    </div>
+
 
 
     <div id="contenedorGame">
 
 
         <h1 id="category"></h1>
-
+        <br>
         <p id="palabraAdivinar"></p>
-
+        <br>
         <h1 id="provenLyrics"></h1>
-
+        <br>
         <h1 id="time"></h1>
-
+        <br>
 
         <div>
 
