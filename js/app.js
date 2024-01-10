@@ -75,12 +75,17 @@ function startWords() {
             palabras = ["Montserrat", "Coliseo", "Louvre", "Santorini", "Dubai",
                 "Viena", "Atenas", "Acropolis", "Piramides", "Jerusalen",
                 "Tokyo"
-            ]
-            mensajePalabra = ["Una montaña y monasterio en Cataluña, España, conocidos por su belleza natural, espiritualidad y vistas impresionantes.", "Antiguo anfiteatro romano en Italia, símbolo de la grandeza arquitectónica romana y escenario de eventos históricos y gladiadores.",
-                "Museo en París, Francia, hogar de la Mona Lisa y una vasta colección de arte, siendo uno de los museos más grandes y visitados del mundo.", "Isla griega famosa por sus impresionantes vistas, arquitectura blanca distintiva y aguas cristalinas, un destino turístico paradisíaco.",
-                "Ciudad en los Emiratos Árabes Unidos con rascacielos futuristas, islas artificiales y atracciones lujosas, representando la modernidad y la opulencia.", "Capital de Austria, conocida por su arquitectura imperial, música clásica y encanto histórico, siendo cuna de grandes compositores como Mozart y Beethoven.",
-                "Capital de Grecia, rica en historia antigua y hogar de la Acrópolis, un sitio arqueológico destacado con el Partenón y otros templos.", "Antigua ciudadela en Atenas, Grecia, con templos históricos que representan la grandeza de la civilización griega.",
-                "Capital de Egipto, famosa por sus pirámides, la Esfinge de Giza y el Museo Egipcio, que alberga tesoros faraónicos.", "Ciudad sagrada para varias religiones, con sitios históricos como el Muro de los Lamentos, la Iglesia del Santo Sepulcro y la Cúpula de la Roca.",
+            ]       
+            mensajePalabra = ["Una montaña y monasterio en Cataluña, España, conocidos por su belleza natural, espiritualidad y vistas impresionantes.", 
+            "Antiguo anfiteatro romano en Italia, símbolo de la grandeza arquitectónica romana y escenario de eventos históricos y gladiadores.",
+                "Museo en París, Francia, hogar de la Mona Lisa y una vasta colección de arte, siendo uno de los museos más grandes y visitados del mundo.",
+                 "Isla griega famosa por sus impresionantes vistas, arquitectura blanca distintiva y aguas cristalinas, un destino turístico paradisíaco.",
+                "Ciudad en los Emiratos Árabes Unidos con rascacielos futuristas, islas artificiales y atracciones lujosas, representando la modernidad y la opulencia.", 
+                "Capital de Austria, conocida por su arquitectura imperial, música clásica y encanto histórico, siendo cuna de grandes compositores como Mozart y Beethoven.",
+                "Capital de Grecia, rica en historia antigua y hogar de la Acrópolis, un sitio arqueológico destacado con el Partenón y otros templos.", 
+                "Antigua ciudadela en Atenas, Grecia, con templos históricos que representan la grandeza de la civilización griega.",
+                "Capital de Egipto, famosa por sus pirámides, la Esfinge de Giza y el Museo Egipcio, que alberga tesoros faraónicos.", 
+                "Ciudad sagrada para varias religiones, con sitios históricos como el Muro de los Lamentos, la Iglesia del Santo Sepulcro y la Cúpula de la Roca.",
                 "Capital de Japón, una metrópolis moderna que combina la tradición con la tecnología, ofreciendo una experiencia única con su animada cultura y luces brillantes."
             ]
             break;
@@ -97,11 +102,11 @@ function selectWord() {
     let selection;
     let wordElection;
 
-    const maxWords = 11
+    const maxWords = 10
 
     selection = Math.floor(Math.random() * maxWords) + 1;
-    wordElection = wordsGame[selection];
-    mensajeElection = mensajePalabra[selection];
+    wordElection = wordsGame[10];
+    mensajeElection = mensajePalabra[10];
 
 
     return wordElection;
@@ -127,9 +132,11 @@ function loadingGame() {
 
         wordSelect = getCookie("palabra");
 
+
     } else {
 
         wordSelect = selectWord();
+
 
     }
 
