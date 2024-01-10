@@ -38,17 +38,15 @@ function startWords() {
             category.innerHTML = `Categoria: Paises`;
 
             palabras = ["Argentina", "Japon", "Italia", "Australia", "India",
-                "Canada", "Mexico", "China", "España", "Rusia",
-                "Francia", "Alemania", "Brasil", "Sudafrica", "Venezuela"
+                "Canada", "Mexico", "China", "España", "Rusia", 
+                "Venezuela"
             ]
 
             mensajePalabra = ["Un país en América del Sur conocido por su tango, asados deliciosos y vastos paisajes, que van desde las cataratas de Iguazú hasta la Patagonia.", "Una nación insular en Asia que combina la rica tradición cultural con la tecnología moderna. Japón es famoso por su sushi, samuráis y hermosos templos.",
                 "País europeo famoso por su arte renacentista, arquitectura histórica, deliciosa comida (como la pasta y la pizza) y ciudades encantadoras como Roma y Florencia.", " Continente-isla con una diversidad única de flora y fauna. Hogar de la Gran Barrera de Coral, canguros y koalas, así como ciudades vibrantes como Sídney y Melbourne.",
                 "País colorido y diverso con una rica historia, arquitectura impresionante (como el Taj Mahal) y una variedad de tradiciones culturales, incluyendo la danza y la gastronomía.", " Gran país norteamericano conocido por su belleza natural, como los Parques Nacionales de Banff y Jasper, así como su amabilidad y calidad de vida.",
                 "País latinoamericano con una cultura vibrante, famoso por su gastronomía picante, festivales coloridos, playas hermosas y antiguas ruinas mayas.", "Nación asiática con una historia milenaria, destacando la Gran Muralla China, la Ciudad Prohibida y la rica tradición cultural que incluye la medicina tradicional china.",
-                "País europeo conocido por su alegría de vivir, festivales animados como La Tomatina y la Feria de Abril, así como la arquitectura única de Antoni Gaudí en Barcelona.", "País extenso que se extiende por Europa y Asia, famoso por su rica historia, arquitectura monumental, como la Plaza Roja en Moscú, y su vasta diversidad cultural.",
-                "País europeo famoso por su romance, la Torre Eiffel en París, la alta cocina, los viñedos en la región de Borgoña y la Costa Azul.", "País europeo con una rica historia, conocido por su eficiencia, castillos medievales, la Oktoberfest en Múnich y la moderna arquitectura de Berlín.",
-                "País sudamericano conocido por su carnaval, playas exóticas como Copacabana, el Amazonas y el fútbol, siendo un país apasionado por este deporte.", "País africano con una diversidad impresionante de paisajes, desde la Table Mountain en Ciudad del Cabo hasta safaris en la sabana, además de una rica historia.",
+                "País europeo conocido por su alegría de vivir, festivales animados como La Tomatina y la Feria de Abril, así como la arquitectura única de Antoni Gaudí en Barcelona.", "País extenso que se extiende por Europa y Asia, famoso por su rica historia, arquitectura monumental, como la Plaza Roja en Moscú, y su vasta diversidad cultural.",                ,
                 "País sudamericano con una geografía diversa que incluye playas caribeñas, la selva amazónica y los Andes. Conocido por el Salto Ángel, la cascada más alta del mundo."
             ]
 
@@ -99,7 +97,7 @@ function selectWord() {
     let selection;
     let wordElection;
 
-    const maxWords = 20
+    const maxWords = 11
 
     selection = Math.floor(Math.random() * maxWords) + 1;
     wordElection = wordsGame[selection];
@@ -180,7 +178,7 @@ function loadingGame() {
 function cargarPalabra() {
     let parrafo = document.getElementById("palabraAdivinar");
 
-
+console.log(wordSelect);
     for (let i = 0; i < wordSelect.length; i++) {
         let span = document.createElement('span');
 
