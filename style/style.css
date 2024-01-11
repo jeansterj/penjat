@@ -24,7 +24,7 @@ width: 100%;
 
 }
 
-#palabraAdivinar span 
+#wordGuess span 
 
 {
 vertical-align: bottom;
@@ -56,7 +56,7 @@ display: inline-block;
 width: 70%;
 }
 
-#contenedorGame
+#containerGame
 {
 
 text-align: start;
@@ -81,7 +81,7 @@ button{
 
 }
 
-#ImagenMensajeFinal
+#FinalImageMessage
 {
 
 max-width: 30%;
